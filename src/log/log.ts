@@ -81,7 +81,7 @@ const format = (...messages: any[]) => {
 };
 
 const fullLog = (type: string, message?: any, ...optionalParams: any[]) => {
-  const prod = process.env.NODE_ENV === 'production';
+  const prod = process.env.LOG_ENV?.toLowerCase().includes('prod');
   const p = (type || 'log').toUpperCase()[0];
   if (prod) {
     const elements = [message, ...optionalParams];
@@ -116,6 +116,10 @@ const fullLog = (type: string, message?: any, ...optionalParams: any[]) => {
     };
     log[process.env.LOG_LEVEL_0 || 'level0'] = self?.['level0'];
     log[process.env.LOG_LEVEL_1 || 'level1'] = self?.['level1'];
+    log[process.env.LOG_LEVEL_2 || 'level2'] = self?.['level2'];
+    log[process.env.LOG_LEVEL_3 || 'level3'] = self?.['level3'];
+    log[process.env.LOG_LEVEL_4 || 'level4'] = self?.['level4'];
+    log[process.env.LOG_LEVEL_5 || 'level5'] = self?.['level5'];
     for (const key in log) {
       if (Object.prototype.hasOwnProperty.call(log, key)) {
         if (!log[key]) delete log[key];
