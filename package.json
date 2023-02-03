@@ -1,0 +1,67 @@
+{
+  "name": "i-level-log",
+  "productName": "iLevelLog",
+  "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
+  "version": "0.0.1",
+  "private": false,
+  "description": "A smart console log extension for NodeJS",
+  "main": "dist/src/index.js",
+  "module": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "log",
+    "nodejs",
+    "typescript",
+    "javascript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Judahh/back.git"
+  },
+  "homepage": "https://github.com/Judahh/back#readme",
+  "license": "MIT",
+  "config": {
+    "jest": "--coverage --passWithNoTests --ci --verbose --forceExit --detectOpenHandles --colors",
+    "integration_config": "-i -c integration.config.json",
+    "unit_coverall": "tests/unit/coverage/lcov.info",
+    "integration_coverall": "tests/integration/coverage/lcov.info",
+    "path_dist": "dist"
+  },
+  "scripts": {
+    "postinstall": "",
+    "prepublish": "",
+    "build": "rm -rf dist/ && tsc",
+    "test": "jest --passWithNoTests --ci --verbose --forceExit --detectOpenHandles",
+    "integration": "jest -i -c integration.config.json --passWithNoTests  --ci --verbose --forceExit --detectOpenHandles",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w"
+  },
+  "dependencies": {
+    "jsonl-parse-stringify": "latest"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "latest",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "babel-jest": "latest",
+    "babel-plugin-root-import": "latest",
+    "babel-plugin-styled-components": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-filenames": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-jsdoc": "latest",
+    "eslint-plugin-prettier": "latest",
+    "jest": "latest",
+    "jest-cli": "latest",
+    "prettier": "latest",
+    "ts-jest": "latest",
+    "ts-node": "latest",
+    "typescript": "latest"
+  }
+}
