@@ -52,7 +52,22 @@ const prefix = (type: string) => {
 };
 
 const format = (...messages: any[]) => {
-  const sMessages = messages.map((m) => JSON.stringify(m, null, 2));
+  const seen = new WeakSet();
+  const sMessages = messages.map((m) =>
+    JSON.stringify(
+      m,
+      (key, value) => {
+        if (typeof value === 'object' && value !== null) {
+          if (seen.has(value)) {
+            return;
+          }
+          seen.add(value);
+        }
+        return value;
+      },
+      2
+    )
+  );
   const lines = sMessages.map((m) => m?.split('\n')).flat();
   let hasNewLine = sMessages.some((m) => m?.includes('\n'));
   let longestMessageLine =
