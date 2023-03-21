@@ -204,7 +204,7 @@ const table = (tabularData?: any, properties?: string[], type = 'log') => {
 };
 
 const printException = (
-  e: Error | Warning,
+  e: unknown | Error | Warning,
   functionInfo?: { name?: string; params?: unknown[] },
   message?: any,
   ...optionalParams: any[]

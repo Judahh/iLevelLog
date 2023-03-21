@@ -2,7 +2,7 @@
   "name": "i-level-log",
   "productName": "iLevelLog",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": false,
   "description": "A smart console log extension for NodeJS",
   "main": "dist/src/index.js",
