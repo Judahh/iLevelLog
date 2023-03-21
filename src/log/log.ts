@@ -1,5 +1,6 @@
 // import chalk from 'chalk';
 import JSONL from 'jsonl-parse-stringify';
+import { Warning } from '../exception/warning';
 export {};
 
 const oldConsole = { ...console };
@@ -196,6 +197,19 @@ const table = (tabularData?: any, properties?: string[], type = 'log') => {
   oldConsole.table(tabularData, properties);
 };
 
+const printException = (
+  e: Error | Warning,
+  message?: any,
+  functionInfo?: { name?: string; params?: unknown[] },
+  ...optionalParams: any[]
+) => {
+  if ((e as Warning).isWarning) {
+    warn(message, ...optionalParams, functionInfo, e);
+  } else {
+    error(message, ...optionalParams, functionInfo, e);
+  }
+};
+
 // eslint-disable-next-line no-global-assign
 console = {
   ...oldConsole,
@@ -206,4 +220,5 @@ console = {
   debug,
   trace,
   table,
+  printException,
 } as Console;
