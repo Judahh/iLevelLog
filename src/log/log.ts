@@ -10,8 +10,8 @@ declare global {
     trace(tabularData?: any, properties?: string[], type?: string): void;
     printException(
       e: Error | Warning,
-      message?: any,
       functionInfo?: { name?: string; params?: unknown[] },
+      message?: any,
       ...optionalParams: any[]
     ): void;
   }
@@ -205,8 +205,8 @@ const table = (tabularData?: any, properties?: string[], type = 'log') => {
 
 const printException = (
   e: Error | Warning,
-  message?: any,
   functionInfo?: { name?: string; params?: unknown[] },
+  message?: any,
   ...optionalParams: any[]
 ) => {
   if ((e as Warning).isWarning) {
