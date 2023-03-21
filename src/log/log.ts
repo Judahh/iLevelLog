@@ -9,7 +9,7 @@ declare global {
   interface Console {
     trace(tabularData?: any, properties?: string[], type?: string): void;
     printException(
-      e: Error | Warning,
+      e: unknown | Error | Warning,
       functionInfo?: { name?: string; params?: unknown[] },
       message?: any,
       ...optionalParams: any[]
