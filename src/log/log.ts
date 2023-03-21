@@ -8,6 +8,12 @@ const oldConsole = { ...console };
 declare global {
   interface Console {
     trace(tabularData?: any, properties?: string[], type?: string): void;
+    printException(
+      e: Error | Warning,
+      message?: any,
+      functionInfo?: { name?: string; params?: unknown[] },
+      ...optionalParams: any[]
+    ): void;
   }
 }
 
