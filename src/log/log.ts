@@ -209,10 +209,12 @@ const printException = (
   message?: any,
   ...optionalParams: any[]
 ) => {
+  message = message || '';
+  const elements = [message, ...(optionalParams || [])];
   if ((e as Warning).isWarning) {
-    warn(message, ...optionalParams, functionInfo, e);
+    warn(...elements, functionInfo, e);
   } else {
-    error(message, ...optionalParams, functionInfo, e);
+    error(...elements, functionInfo, e);
   }
 };
 
