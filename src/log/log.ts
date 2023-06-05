@@ -44,6 +44,18 @@ const consoleLevelValue = {
   T: 5,
 };
 
+const alwaysLogString = process.env.LOG_USE_ALWAYS_LOG
+  ? process.env.LOG_USE_ALWAYS_LOG
+  : 'false';
+
+let alwaysLog = false;
+
+try {
+  alwaysLog = JSON.parse(alwaysLogString);
+} catch (error) {
+  alwaysLog = false;
+}
+
 const prefix = (type: string) => {
   const date = new Date();
   const time = date.toLocaleString(process.env.LOG_DATE_LOCALE || 'pt-BR');
@@ -157,43 +169,53 @@ const log = (message?: any, ...optionalParams: any[]) => {
 };
 
 const info = (message?: any, ...optionalParams: any[]) => {
-  oldConsole.info(
-    // chalk.blue(
-    ...fullLog('I', message, ...optionalParams)
-    // )
-  );
+  if (alwaysLog) oldConsole.log(...fullLog('I', message, ...optionalParams));
+  else
+    oldConsole.info(
+      // chalk.blue(
+      ...fullLog('I', message, ...optionalParams)
+      // )
+    );
 };
 
 const warn = (message?: any, ...optionalParams: any[]) => {
-  oldConsole.warn(
-    // chalk.yellow(
-    ...fullLog('W', message, ...optionalParams)
-    // )
-  );
+  if (alwaysLog) oldConsole.log(...fullLog('W', message, ...optionalParams));
+  else
+    oldConsole.warn(
+      // chalk.yellow(
+      ...fullLog('W', message, ...optionalParams)
+      // )
+    );
 };
 
 const error = (message?: any, ...optionalParams: any[]) => {
-  oldConsole.error(
-    // chalk.red(
-    ...fullLog('E', message, ...optionalParams)
-    // )
-  );
+  if (alwaysLog) oldConsole.log(...fullLog('E', message, ...optionalParams));
+  else
+    oldConsole.error(
+      // chalk.red(
+      ...fullLog('E', message, ...optionalParams)
+      // )
+    );
 };
 
 const debug = (message?: any, ...optionalParams: any[]) => {
-  oldConsole.debug(
-    // chalk.yellow(
-    ...fullLog('D', message, ...optionalParams)
-    // )
-  );
+  if (alwaysLog) oldConsole.log(...fullLog('D', message, ...optionalParams));
+  else
+    oldConsole.debug(
+      // chalk.yellow(
+      ...fullLog('D', message, ...optionalParams)
+      // )
+    );
 };
 
 const trace = (message?: any, ...optionalParams: any[]) => {
-  oldConsole.trace(
-    // chalk.yellow(
-    ...fullLog('T', message, ...optionalParams)
-    // )
-  );
+  if (alwaysLog) oldConsole.log(...fullLog('T', message, ...optionalParams));
+  else
+    oldConsole.trace(
+      // chalk.yellow(
+      ...fullLog('T', message, ...optionalParams)
+      // )
+    );
 };
 
 const table = (tabularData?: any, properties?: string[], type = 'log') => {
