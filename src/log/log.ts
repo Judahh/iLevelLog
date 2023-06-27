@@ -70,10 +70,11 @@ const prefix = (type: string) => {
   );
 };
 
-const format = (...messages: any[]) => {
-  const seen = new WeakSet();
-  const sMessages = messages.map((m) =>
-    JSON.stringify(
+const stringify = (m: any, space = 2, tSeen?: WeakSet<any>) => {
+  const seen = tSeen || new WeakSet();
+  let result;
+  try {
+    result = JSON.stringify(
       m,
       (key, value) => {
         if (typeof value === 'object' && value !== null) {
@@ -84,9 +85,18 @@ const format = (...messages: any[]) => {
         }
         return value;
       },
-      2
-    )
-  );
+      space
+    );
+  } catch (error) {
+    result = (error as Error)?.message;
+  }
+  return result;
+};
+
+const format = (...messages: any[]) => {
+  const seen = new WeakSet();
+  // TODO: Checar se deve remover o seen
+  const sMessages = messages.map((m) => stringify(m, 2, seen));
   const lines = sMessages.map((m) => m?.split('\n')).flat();
   let hasNewLine = sMessages.some((m) => m?.includes('\n'));
   let longestMessageLine =
@@ -159,7 +169,14 @@ const fullLog = (type: string, message?: any, ...optionalParams: any[]) => {
         if (!log[key]) delete log[key];
       }
     }
-    return [JSONL.stringify([log])];
+
+    let j;
+    try {
+      j = JSONL.stringify(JSON.parse(stringify([log])));
+    } catch (error) {
+      j = (error as Error)?.message;
+    }
+    return [j];
   }
   return [prefix(type), ...format(message, ...optionalParams)];
 };
