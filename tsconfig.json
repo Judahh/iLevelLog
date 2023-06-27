@@ -7,7 +7,6 @@
     "declarationMap": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "suppressImplicitAnyIndexErrors": true,
     "outDir": "./dist",
     "removeComments": false,
     "strict": true,
