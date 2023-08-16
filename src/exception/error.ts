@@ -1,10 +1,10 @@
-class Warning extends Error {
-  isWarning = true;
+class SmartError extends Error {
+  isWarning = false;
   static count = 0;
   constructor(message: string, options?: ErrorOptions) {
     super(message, options);
-    Warning.count++;
+    SmartError.count++;
   }
 }
 
-export { Warning };
+export { SmartError as Error };

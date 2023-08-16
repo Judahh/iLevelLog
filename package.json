@@ -2,7 +2,7 @@
   "name": "i-level-log",
   "productName": "iLevelLog",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": false,
   "description": "A smart console log extension for NodeJS",
   "main": "dist/src/index.js",
@@ -34,7 +34,7 @@
     "postinstall": "",
     "prepublish": "",
     "build": "rm -rf dist/ && tsc",
-    "test": "jest --passWithNoTests --ci --verbose --forceExit --detectOpenHandles",
+    "test": "jest -c jest.config.json  --passWithNoTests --ci --verbose --forceExit --detectOpenHandles",
     "integration": "jest -i -c integration.config.json --passWithNoTests  --ci --verbose --forceExit --detectOpenHandles",
     "tsc": "tsc",
     "tsc:w": "tsc -w"
