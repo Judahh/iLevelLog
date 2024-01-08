@@ -1,7 +1,7 @@
 // import chalk from 'chalk';
 import JSONL from 'jsonl-parse-stringify';
 import { Warning } from '../exception/warning';
-export {};
+export { };
 
 const oldConsole = { ...console };
 
@@ -114,6 +114,17 @@ const format = (...messages: any[]) => {
     } else if (messages?.[lines?.length - 1] == '\n') {
       messages.pop();
       hasNewLine = true;
+    }
+  }
+
+  const disableDivider = process.env.LOG_DISABLE_DIVIDER;
+  if (disableDivider) {
+    // use JSON.parse to convert string to boolean
+    try {
+      if (JSON.parse(disableDivider)) {
+        return messages;
+      }
+    } catch (error) {
     }
   }
 
